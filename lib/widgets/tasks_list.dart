@@ -1,13 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todo_provider/widgets/task_tile.dart';
+import 'package:flutter_todo_provider/models/task.dart';
 
-class TasksList extends StatelessWidget {
+class TasksList extends StatefulWidget {
+  @override
+  _TasksListState createState() => _TasksListState();
+}
+
+class _TasksListState extends State<TasksList> {
+  List<Task> tasks = [
+    Task(name: 'task1'),
+  ];
+
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: <Widget>[
-        TaskTile(),
-      ],
+    return ListView.builder(
+      itemBuilder: (context, index) {
+        return TaskTile(
+          taskTitle: tasks[index].name,
+          isChecked: tasks[index].isDone,
+        );
+      },
+      itemCount: tasks.length,
     );
   }
 }
